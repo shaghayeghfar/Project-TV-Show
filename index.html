@@ -10,14 +10,26 @@
 </head>
 
 <body>
-  <div id="root">
-  </div>
+  <section id="search-section">
+    <label for="searchInput">Search episodes: </label>
+    <input
+      id="searchInput"
+      type="text"
+      placeholder="Type to search name or summary…"
+    />
+    <span id="searchCount"></span>
+  </section>
 
-  <!-- Loads a provided function called getAllEpisodes() which returns all episodes -->
+  <div id="root"></div>
+
+  <!-- Make sure episodes data is loaded BEFORE script.js -->
   <script src="episodes.js"></script>
-
-  <!-- Loads YOUR javascript code -->
   <script src="script.js"></script>
 </body>
+
+ 
+
+
+
 
 </html>
