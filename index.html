@@ -1,35 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>TV Show Episodes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Link to your CSS file -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TV Show Project | Shaghayegh (shaghayeghfar)</title>
-  <link href="style.css" rel="stylesheet" />
-  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
-</head>
+  <body>
+    <!-- Top controls: search + dropdown + count -->
+    <section id="controls">
+      <label for="searchInput">Search episodes:</label>
+      <input
+        id="searchInput"
+        type="text"
+        placeholder="Type to search name or summary…"
+      />
 
-<body>
-  <section id="search-section">
-    <label for="searchInput">Search episodes: </label>
-    <input
-      id="searchInput"
-      type="text"
-      placeholder="Type to search name or summary…"
-    />
-    <span id="searchCount"></span>
-  </section>
+      <label for="episodeSelect">Go to episode:</label>
+      <select id="episodeSelect">
+        <!-- JS will fill the options -->
+      </select>
 
-  <div id="root"></div>
+      <span id="searchCount"></span>
+    </section>
 
-  <!-- Make sure episodes data is loaded BEFORE script.js -->
-  <script src="episodes.js"></script>
-  <script src="script.js"></script>
-</body>
+    <!-- Where all the episode cards will be rendered -->
+    <div id="root"></div>
 
- 
-
-
-
-
+    <!-- Make sure episodes.js comes before script.js -->
+    <script src="episodes.js"></script>
+    <script src="script.js"></script>
+  </body>
 </html>

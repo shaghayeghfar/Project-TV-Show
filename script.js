@@ -52,36 +52,78 @@ function updateCount(showing, total) {
   searchCount.textContent = `Showing ${showing} / ${total} episodes`;
 }
 
-// Set everything up once the page has loaded
-window.onload = function () {
+// ⭐ NEW: fill the dropdown with all episodes
+function populateEpisodeSelect() {
+  const episodeSelect = document.getElementById("episodeSelect");
+  episodeSelect.innerHTML = ""; // clear old options
+
+  // Default option: All episodes
+  const defaultOption = document.createElement("option");
+  defaultOption.value = "all";
+  defaultOption.textContent = "All episodes";
+  episodeSelect.appendChild(defaultOption);
+
+  // One option per episode
+  allEpisodes.forEach((episode) => {
+    const option = document.createElement("option");
+    option.value = episode.id; // use unique id from TVMaze data
+    option.textContent = `${formatEpisodeCode(episode)} - ${episode.name}`;
+    episodeSelect.appendChild(option);
+  });
+}
+
+// ⭐ NEW: apply BOTH filters (search + dropdown)
+function applyFilters() {
   const searchInput = document.getElementById("searchInput");
+  const episodeSelect = document.getElementById("episodeSelect");
 
-  // getAllEpisodes is defined in episodes.js
-  allEpisodes = getAllEpisodes();
+  const term = searchInput.value.trim().toLowerCase();
+  const selectedValue = episodeSelect.value;
 
-  // Initial render: show all episodes
-  makePageForEpisodes(allEpisodes);
-  updateCount(allEpisodes.length, allEpisodes.length);
+  let filteredEpisodes = allEpisodes;
 
-  // Live search: runs on every key press
-  searchInput.addEventListener("input", function () {
-    const term = searchInput.value.trim().toLowerCase();
+  // 1) Dropdown filter: if not "all", keep only that episode
+  if (selectedValue !== "all") {
+    filteredEpisodes = filteredEpisodes.filter(
+      (episode) => String(episode.id) === String(selectedValue)
+    );
+  }
 
-    // If empty, show all episodes
-    if (term === "") {
-      makePageForEpisodes(allEpisodes);
-      updateCount(allEpisodes.length, allEpisodes.length);
-      return;
-    }
-
-    // Filter by name OR summary (case-insensitive)
-    const filtered = allEpisodes.filter((episode) => {
+  // 2) Search filter: name OR summary (case-insensitive)
+  if (term !== "") {
+    filteredEpisodes = filteredEpisodes.filter((episode) => {
       const name = episode.name.toLowerCase();
       const summary = (episode.summary || "").toLowerCase();
       return name.includes(term) || summary.includes(term);
     });
+  }
 
-    makePageForEpisodes(filtered);
-    updateCount(filtered.length, allEpisodes.length);
+  // Render result + update count
+  makePageForEpisodes(filteredEpisodes);
+  updateCount(filteredEpisodes.length, allEpisodes.length);
+}
+
+// Set everything up once the page has loaded
+window.onload = function () {
+  const searchInput = document.getElementById("searchInput");
+  const episodeSelect = document.getElementById("episodeSelect");
+
+  // getAllEpisodes is defined in episodes.js
+  allEpisodes = getAllEpisodes();
+
+  // Fill dropdown with all episodes
+  populateEpisodeSelect();
+
+  // Initial render: show all episodes
+  applyFilters(); // this will show all + correct count
+
+  // Live search: runs on every key press
+  searchInput.addEventListener("input", function () {
+    applyFilters();
+  });
+
+  // Dropdown change: runs whenever user selects a new option
+  episodeSelect.addEventListener("change", function () {
+    applyFilters();
   });
 };
