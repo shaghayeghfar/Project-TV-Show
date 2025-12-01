@@ -28,8 +28,7 @@ function makePageForEpisodes(episodeList) {
     img.alt = episode.name;
 
     const summarySection = document.createElement("section");
-    // summary may contain HTML from TVMaze
-    summarySection.innerHTML = episode.summary;
+    summarySection.innerHTML = episode.summary; // contains HTML
 
     const link = document.createElement("a");
     link.href = episode.url;
@@ -52,27 +51,25 @@ function updateCount(showing, total) {
   searchCount.textContent = `Showing ${showing} / ${total} episodes`;
 }
 
-// ⭐ NEW: fill the dropdown with all episodes
+// Fill the dropdown with all episodes
 function populateEpisodeSelect() {
   const episodeSelect = document.getElementById("episodeSelect");
   episodeSelect.innerHTML = ""; // clear old options
 
-  // Default option: All episodes
   const defaultOption = document.createElement("option");
   defaultOption.value = "all";
   defaultOption.textContent = "All episodes";
   episodeSelect.appendChild(defaultOption);
 
-  // One option per episode
   allEpisodes.forEach((episode) => {
     const option = document.createElement("option");
-    option.value = episode.id; // use unique id from TVMaze data
+    option.value = episode.id;
     option.textContent = `${formatEpisodeCode(episode)} - ${episode.name}`;
     episodeSelect.appendChild(option);
   });
 }
 
-// ⭐ NEW: apply BOTH filters (search + dropdown)
+// Apply both filters (search + dropdown)
 function applyFilters() {
   const searchInput = document.getElementById("searchInput");
   const episodeSelect = document.getElementById("episodeSelect");
@@ -80,50 +77,63 @@ function applyFilters() {
   const term = searchInput.value.trim().toLowerCase();
   const selectedValue = episodeSelect.value;
 
-  let filteredEpisodes = allEpisodes;
+  let filtered = allEpisodes;
 
-  // 1) Dropdown filter: if not "all", keep only that episode
   if (selectedValue !== "all") {
-    filteredEpisodes = filteredEpisodes.filter(
-      (episode) => String(episode.id) === String(selectedValue)
+    filtered = filtered.filter(
+      (episode) => String(episode.id) === selectedValue
     );
   }
 
-  // 2) Search filter: name OR summary (case-insensitive)
   if (term !== "") {
-    filteredEpisodes = filteredEpisodes.filter((episode) => {
+    filtered = filtered.filter((episode) => {
       const name = episode.name.toLowerCase();
       const summary = (episode.summary || "").toLowerCase();
       return name.includes(term) || summary.includes(term);
     });
   }
 
-  // Render result + update count
-  makePageForEpisodes(filteredEpisodes);
-  updateCount(filteredEpisodes.length, allEpisodes.length);
+  makePageForEpisodes(filtered);
+  updateCount(filtered.length, allEpisodes.length);
 }
 
-// Set everything up once the page has loaded
+// ⭐ NEW: load episodes using fetch (ONE TIME ONLY)
+async function loadEpisodes() {
+  const rootElem = document.getElementById("root");
+
+  // Show loading message
+  rootElem.innerHTML = "<p>Loading episodes...</p>";
+
+  try {
+    const response = await fetch("https://api.tvmaze.com/shows/82/episodes");
+
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+
+    allEpisodes = await response.json();
+
+    // Now we can render everything
+    populateEpisodeSelect();
+    applyFilters();
+  } catch (error) {
+    rootElem.innerHTML =
+      "<p style='color:red;'>Failed to load data. Please try again later.</p>";
+    console.error("Error loading episodes:", error);
+  }
+}
+
+// -------------------------------
+// PAGE LOAD
+// -------------------------------
 window.onload = function () {
   const searchInput = document.getElementById("searchInput");
   const episodeSelect = document.getElementById("episodeSelect");
 
-  // getAllEpisodes is defined in episodes.js
-  allEpisodes = getAllEpisodes();
+  // Load data only ONCE
+  loadEpisodes();
 
-  // Fill dropdown with all episodes
-  populateEpisodeSelect();
-
-  // Initial render: show all episodes
-  applyFilters(); // this will show all + correct count
-
-  // Live search: runs on every key press
-  searchInput.addEventListener("input", function () {
-    applyFilters();
-  });
-
-  // Dropdown change: runs whenever user selects a new option
-  episodeSelect.addEventListener("change", function () {
-    applyFilters();
-  });
+  // Filters
+  searchInput.addEventListener("input", applyFilters);
+  episodeSelect.addEventListener("change", applyFilters);
 };
