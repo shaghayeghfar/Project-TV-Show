@@ -8,29 +8,35 @@
     <link rel="stylesheet" href="style.css" />
   </head>
 
-  <body>
-    <!-- Top controls: search + dropdown + count -->
-    <section id="controls">
-      <label for="searchInput">Search episodes:</label>
-      <input
-        id="searchInput"
-        type="text"
-        placeholder="Type to search name or summary…"
-      />
 
-      <label for="episodeSelect">Go to episode:</label>
-      <select id="episodeSelect">
-        <!-- JS will fill the options -->
-      </select>
+   <body>
+  <!-- Top controls: show select + search + episode select + count -->
+  <section id="controls">
+    <label for="showSelect">Select show:</label>
+    <select id="showSelect">
+      <!-- JS will fill this with shows -->
+    </select>
 
-      <span id="searchCount"></span>
-    </section>
+    <label for="searchInput">Search episodes:</label>
+    <input
+      id="searchInput"
+      type="text"
+      placeholder="Type to search name or summary…"
+    />
 
-    <!-- Where all the episode cards will be rendered -->
-    <div id="root"></div>
+    <label for="episodeSelect">Go to episode:</label>
+    <select id="episodeSelect">
+      <!-- JS will fill this with episodes -->
+    </select>
 
-    <!-- Make sure episodes.js comes before script.js -->
-    <script src="episodes.js"></script>
-    <script src="script.js"></script>
+    <span id="searchCount"></span>
+  </section>
+
+  <!-- Where all the episode cards OR messages will be rendered -->
+  <div id="root"></div>
+
+  <!-- Only script.js now – no episodes.js -->
+  <script src="script.js"></script>
+
   </body>
 </html>
