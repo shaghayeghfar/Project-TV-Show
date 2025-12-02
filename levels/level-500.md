@@ -5,6 +5,7 @@ For level 500, you should switch back to your original codebase.
 You should have merged someone else's level 400 implementation.
 
 Once again, compare their implementation to yours. Think:
+
 1. How is it different?
 2. What do you prefer about your implementation?
 3. What do you prefer about their implementation?
