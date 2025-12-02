@@ -1,5 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+<<<<<<< Updated upstream
+=======
+
+<head>
+  <meta charset="UTF-8">
+  <title>TV Shows Browser</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <h1>TV Shows Browser</h1>
+  <button id="backButton" style="display:none;">← Back</button>
+>>>>>>> Stashed changes
 
 <head>
   <meta charset="UTF-8" />
@@ -8,6 +22,7 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 
+<<<<<<< Updated upstream
 <body>
   <!-- Top controls: search + dropdown + count -->
   <section id="controls">
@@ -26,6 +41,35 @@
   <div id="root"></div>
 
   <!-- ONLY script.js (episodes.js is removed) -->
+=======
+  <!-- SHOW SEARCH -->
+  <section id="showSearchSection">
+    <input id="showSearchInput" type="text" placeholder="Search shows by name, genre, or summary...">
+  </section>
+
+  <!-- SHOWS LISTING -->
+  <div id="showsListing"></div>
+
+  <!-- BACK BUTTON -->
+  <button id="backToShows" style="display:none;">← Back to Shows</button>
+
+  <!-- EPISODE CONTROLS -->
+  <section id="controls" style="display:none;">
+    <label>Search episodes:</label>
+    <input type="text" id="searchInput" placeholder="Search episodes...">
+    <span id="searchCount"></span>
+
+    <label>Episode:</label>
+    <select id="episodeSelect"></select>
+
+    <label>Show:</label>
+    <select id="showSelect"></select>
+  </section>
+
+  <!-- EPISODES PAGE -->
+  <div id="root" style="display:none;"></div>
+
+>>>>>>> Stashed changes
   <script src="script.js"></script>
 </body>
 
