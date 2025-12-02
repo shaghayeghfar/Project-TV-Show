@@ -1,48 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-<<<<<<< Updated upstream
-=======
 
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TV Shows Browser</title>
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
 
+<body>
   <h1>TV Shows Browser</h1>
+
+  <!-- Back button to return to main view -->
   <button id="backButton" style="display:none;">← Back</button>
->>>>>>> Stashed changes
 
-<head>
-  <meta charset="UTF-8" />
-  <title>TV Show Episodes</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="style.css" />
-</head>
-
-<<<<<<< Updated upstream
-<body>
-  <!-- Top controls: search + dropdown + count -->
-  <section id="controls">
-    <label for="searchInput">Search episodes:</label>
-    <input id="searchInput" type="text" placeholder="Type to search name or summary…" />
-
-    <label for="episodeSelect">Go to episode:</label>
-    <select id="episodeSelect">
-      <!-- JS will fill the options -->
-    </select>
-
-    <span id="searchCount"></span>
-  </section>
-
-  <!-- Where all the episode cards will appear -->
-  <div id="root"></div>
-
-  <!-- ONLY script.js (episodes.js is removed) -->
-=======
-  <!-- SHOW SEARCH -->
+  <!-- SHOW SEARCH SECTION -->
   <section id="showSearchSection">
     <input id="showSearchInput" type="text" placeholder="Search shows by name, genre, or summary...">
   </section>
@@ -50,26 +23,31 @@
   <!-- SHOWS LISTING -->
   <div id="showsListing"></div>
 
-  <!-- BACK BUTTON -->
+  <!-- Back to Shows button (visible when viewing episodes) -->
   <button id="backToShows" style="display:none;">← Back to Shows</button>
 
   <!-- EPISODE CONTROLS -->
   <section id="controls" style="display:none;">
-    <label>Search episodes:</label>
-    <input type="text" id="searchInput" placeholder="Search episodes...">
-    <span id="searchCount"></span>
+    <div>
+      <label for="searchInput">Search episodes:</label>
+      <input type="text" id="searchInput" placeholder="Search episodes...">
+      <span id="searchCount"></span>
+    </div>
 
-    <label>Episode:</label>
-    <select id="episodeSelect"></select>
+    <div>
+      <label for="episodeSelect">Episode:</label>
+      <select id="episodeSelect"></select>
+    </div>
 
-    <label>Show:</label>
-    <select id="showSelect"></select>
+    <div>
+      <label for="showSelect">Show:</label>
+      <select id="showSelect"></select>
+    </div>
   </section>
 
   <!-- EPISODES PAGE -->
   <div id="root" style="display:none;"></div>
 
->>>>>>> Stashed changes
   <script src="script.js"></script>
 </body>
 
