@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 /* General reset */
 * {
   box-sizing: border-box;
@@ -9,17 +8,8 @@
 
 /* Body styling */
 body {
-  background-color: #f9f9f9;
+  background-color: #f5f5f5;
   color: #333;
-  padding: 20px;
-}
-
-/* 🔹 Top controls: search + dropdown + count */
-=======
-body {
-  font-family: Arial, sans-serif;
-  background: #f5f5f5;
-  margin: 0;
   padding: 20px;
 }
 
@@ -28,6 +18,7 @@ h1 {
   margin-bottom: 20px;
 }
 
+/* Show search section */
 #showSearchSection {
   text-align: center;
   margin-bottom: 20px;
@@ -39,6 +30,7 @@ h1 {
   font-size: 16px;
 }
 
+/* Shows listing */
 #showsListing {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -52,11 +44,12 @@ h1 {
   padding: 15px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .show-card:hover {
   transform: scale(1.03);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 .show-card img {
@@ -72,11 +65,10 @@ h1 {
   margin: 5px 0;
 }
 
->>>>>>> Stashed changes
+/* Controls: search + dropdown + count */
 #controls {
   display: flex;
   gap: 10px;
-<<<<<<< Updated upstream
   align-items: center;
   margin-bottom: 20px;
   background-color: #ffffff;
@@ -114,12 +106,7 @@ h1 {
   color: #666;
 }
 
-/* Root container – grid of episode cards */
-=======
-  margin: 20px;
-}
-
->>>>>>> Stashed changes
+/* Episodes grid */
 #root {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -127,72 +114,29 @@ h1 {
   padding: 20px;
 }
 
-<<<<<<< Updated upstream
-/* Episode card */
-=======
->>>>>>> Stashed changes
+/* Episode cards */
 .episode-card {
   background: white;
   padding: 10px;
   border-radius: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
-<<<<<<< Updated upstream
 .episode-card:hover {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transform: translateY(-2px);
 }
 
-/* Episode title */
-.episode-card h2 {
-  font-size: 1.1rem;
-  margin: 12px 16px 8px 16px;
-  color: #222;
-}
-
-/* Episode image */
 .episode-card img {
   width: 100%;
-  display: block;
+  border-radius: 8px;
 }
 
-/* Episode summary (you’re using <section> in JS) */
-.episode-card section {
-  padding: 8px 16px 16px 16px;
-  font-size: 0.95rem;
-  color: #444;
-  line-height: 1.4;
-}
-
-/* Link to TVMaze inside card */
-.episode-card a {
-  margin: 0 16px 16px 16px;
-  font-size: 0.9rem;
-  color: #0077cc;
-  text-decoration: none;
-}
-
-.episode-card a:hover {
-  text-decoration: underline;
-}
-
-/* TVMaze credit at bottom (if you add one) */
-#root p {
-  grid-column: 1 / -1;
-  text-align: center;
-  margin-top: 30px;
-  font-size: 0.9rem;
-  color: #777;
-}
-
-#root p a {
-  color: #0077cc;
-  text-decoration: none;
-}
-
-#root p a:hover {
-  text-decoration: underline;
+#backToShows {
+  margin-left: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
 }
 
 /* Responsive adjustments for small screens */
@@ -217,16 +161,8 @@ h1 {
   .episode-card h2 {
     font-size: 1rem;
   }
-}
-=======
-.episode-card img {
-  width: 100%;
-  border-radius: 8px;
-}
 
-#backToShows {
-  margin-left: 20px;
-  padding: 10px 20px;
-  font-size: 16px;
+  #showSearchInput {
+    width: 100%;
+  }
 }
->>>>>>> Stashed changes
